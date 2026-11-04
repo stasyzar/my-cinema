@@ -7,9 +7,10 @@ const NAV_ITEMS = [
         label: 'Афіша',
         to: '/',
         submenu: [
-            { label: 'Усі фільми', to: '/' },
-            { label: 'Формат IMAX', to: '/?format=IMAX' },
-            { label: 'Формат 3D', to: '/?format=3D' },
+            { label: 'Усі фільми', to: '/', reset: true },
+            { label: 'Формат IMAX', to: '/', format: 'IMAX' },
+            { label: 'Формат 3D', to: '/', format: '3D' },
+            { label: 'Формат 2D', to: '/', format: '2D' },
         ],
     },
     {
@@ -26,28 +27,37 @@ const NAV_ITEMS = [
     },
 ];
 
-export default function Header() {
+export default function Header({ toggleFilter, resetFilters }) {
     const { user, login, logout } = useAuth();
 
     return (
         <header className="header">
             <span className="logo-mark"><Icon name="brand" size={22} /></span>
-            <Link to="/" className='header-logo'>
+            <Link to="/" className='header-logo' onClick={resetFilters}>
                 MY<span>CINEMA</span>
             </Link>
 
             <div className="header-nav">
                 {NAV_ITEMS.map((item) => (
-                <div key={item.label} className="nav-item">
-                    <Link to={item.to} className="nav-link">{item.label} {item.submenu && <Icon name="chevron" size={12} />}</Link>
-                    {item.submenu && (
-                        <div className="submenu">
-                            {item.submenu.map((subItem, subIndex) => (
-                                <Link key={subIndex} to={subItem.to}>{subItem.label}</Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
+                    <div key={item.label} className="nav-item">
+                        <Link to={item.to} className="nav-link">{item.label} {item.submenu && <Icon name="chevron" size={12} />}</Link>
+                        {item.submenu && (
+                            <div className="submenu">
+                                {item.submenu.map((subItem, subIndex) => (
+                                    <Link
+                                        key={subIndex}
+                                        to={subItem.to}
+                                        onClick={() => {
+                                            if (subItem.reset) resetFilters();
+                                            if (subItem.format) toggleFilter('format', subItem.format);
+                                        }}
+                                    >
+                                        {subItem.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 ))}
             </div>
 

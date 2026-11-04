@@ -319,3 +319,45 @@ body {
     }
   }
 }
+
+// 10. Клієнтська пагінація
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  padding-bottom: 16px;
+
+  button {
+    min-width: 38px;
+    height: 38px;
+    padding: 0 14px;
+    background-color: $bg-panel;
+    color: $text-main;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      border-color: $accent-color;
+      color: $accent-color;
+    }
+
+    // Активна сторінка (1, 2 або 3)
+    &.active {
+      background-color: $accent-color;
+      border-color: $accent-color;
+      color: #fff;
+    }
+
+    // Неактивна кнопка (наприклад, «Попередня» на 1-й сторінці)
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}

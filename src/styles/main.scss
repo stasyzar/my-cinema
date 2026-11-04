@@ -361,3 +361,49 @@ body {
     }
   }
 }
+
+// 11. Панель пошуку, фільтрації та сортування
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  .search-input {
+    flex: 1;
+    min-width: 220px;
+    height: 42px;
+    padding: 0 16px;
+    background-color: $bg-panel;
+    color: $text-main;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $accent-color;
+    }
+  }
+
+  .filter-select {
+    height: 42px;
+    padding: 0 14px;
+    background-color: $bg-panel;
+    color: $text-main;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+
+    &:focus {
+      border-color: $accent-color;
+    }
+  }
+}

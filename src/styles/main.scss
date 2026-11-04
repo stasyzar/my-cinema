@@ -139,7 +139,7 @@ body {
   .header-user {
     margin-left: auto;
 
-    > div {
+    >div {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -205,7 +205,7 @@ body {
 // 8. Блок контенту — ЄДИНИЙ основний блок, який прокручується!
 .content {
   flex: 1; // Розтягується на весь доступний простір
-  overflow-y: auto;   // Прокручується вертикально
+  overflow-y: auto; // Прокручується вертикально
   overflow-x: hidden; // Жодного горизонтального скролу
   padding: 24px;
 }
@@ -425,6 +425,32 @@ body {
     color: $text-main;
   }
 
+  .sidebar-reset {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 18px;
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: $text-main;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+
+    &:hover {
+      border-color: $accent-color;
+      color: $accent-color;
+    }
+
+    &.active {
+      background-color: rgba($accent-color, 0.16);
+      border-color: rgba($accent-color, 0.45);
+      color: #fff;
+    }
+  }
+
   .sidebar-section {
     margin-bottom: 22px;
     padding-bottom: 16px;
@@ -464,6 +490,15 @@ body {
     &:hover {
       background-color: rgba(255, 255, 255, 0.05);
     }
+
+    .icon-chevron {
+      transform: rotate(-90deg);
+      transition: transform 0.2s ease;
+    }
+
+    &.open .icon-chevron {
+      transform: rotate(0deg);
+    }
   }
 
   .sidebar-children {
@@ -475,20 +510,37 @@ body {
   }
 
   // Рівень 2: відступ +2X px (32px)
+  // Рівень 2: відступ +2X px (32px)
   .sidebar-level-2 {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 7px 10px 7px ($indent-step * 2); // 32px (на 16px більше за попередній рівень!)
+    padding: 7px 10px 7px ($indent-step * 2); // 32px
+    background: transparent;
+    border: 1px solid transparent;
     border-radius: 8px;
     color: $text-muted;
-    text-decoration: none;
     font-size: 13px;
+    cursor: pointer;
     transition: all 0.15s ease;
 
     &:hover {
       color: $text-main;
       background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    // Коли пункт реально вибраний!
+    &.active {
+      color: #fff;
+      background-color: rgba($accent-color, 0.16);
+      border-color: rgba($accent-color, 0.45);
+      font-weight: 600;
+
+      .sidebar-badge {
+        background-color: $accent-color;
+        color: #fff;
+      }
     }
   }
 
@@ -504,4 +556,14 @@ body {
     font-size: 11px;
     color: $text-muted;
   }
+}
+
+.empty-state {
+  padding: 48px 24px;
+  text-align: center;
+  color: $text-muted;
+  background-color: $bg-panel;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  font-size: 15px;
 }

@@ -407,3 +407,101 @@ body {
     }
   }
 }
+
+// 5. Лівий блок (Sidebar) — ширина Y px ($sidebar-width: 260px), відступи +X px ($indent-step: 16px)
+.sidebar {
+  width: $sidebar-width;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto; // Прокручує ТІЛЬКИ ліве меню
+  background-color: $bg-panel;
+  border-right: 1px solid $border-color;
+  padding: 20px 16px;
+
+  .sidebar-heading {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: $text-main;
+  }
+
+  .sidebar-section {
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $border-color;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Рівень 0: відступ 0px
+  .sidebar-level-0 {
+    padding-left: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: $text-muted;
+    margin-bottom: 10px;
+  }
+
+  // Рівень 1: відступ +X px (16px)
+  .sidebar-level-1 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px 8px $indent-step; // 16px
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: $text-main;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .sidebar-children {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 2px;
+    margin-bottom: 6px;
+  }
+
+  // Рівень 2: відступ +2X px (32px)
+  .sidebar-level-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px 7px ($indent-step * 2); // 32px (на 16px більше за попередній рівень!)
+    border-radius: 8px;
+    color: $text-muted;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      color: $text-main;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .sidebar-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.07);
+    font-size: 11px;
+    color: $text-muted;
+  }
+}

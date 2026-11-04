@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+// 1. Базове скидання відступів і заборона горизонтального скролу (вимога методички!)
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; // Ніколи не допускаємо горизонтальний скрол
+  background-color: $bg-main;
+  color: $text-main;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+// 2. Головний каркас на весь екран (100vh)
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; // Забороняємо скрол всій сторінці — крутитиметься тільки контент!
+}
+
+// 3. Верхній блок (Шапка) — стоїть нерухомо зверху
+.header {
+  flex-shrink: 0; // Не стискається при зменшенні вікна
+  background-color: $bg-panel;
+  border-bottom: 1px solid $border-color;
+  padding: 16px 24px;
+}
+
+// 4. Нижня частина (Ліве меню + Права колонка)
+.layout-body {
+  flex: 1; // Займає весь доступний простір під шапкою
+  display: flex;
+  overflow: hidden; // Важливо, щоб дочірні блоки мали власний скрол
+}
+
+// 5. Лівий блок (Sidebar) — ширина Y px і власний вертикальний скрол
+.sidebar {
+  width: $sidebar-width; // Підставляється 260px зі змінної!
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto; // Вимога методички: цей скрол прокручує ТІЛЬКИ меню
+  background-color: $bg-panel;
+  border-right: 1px solid $border-color;
+  padding: 16px;
+}
+
+// 6. Права частина (Хлібні крихти зверху + Контент під ними)
+.main-column {
+  flex: 1; // Розтягується на всю решту ширини вікна
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; // Захист у flexbox від горизонтального переповнення
+}
+
+// 7. Хлібні крихти (Breadcrumbs) — стоять нерухомо над контентом
+.breadcrumbs {
+  flex-shrink: 0;
+  background-color: $bg-breadcrumbs;
+  border-bottom: 1px solid $border-color;
+  padding: 10px 24px;
+  font-size: 14px;
+  color: $text-muted;
+}
+
+// 8. Блок контенту — ЄДИНИЙ основний блок, який прокручується!
+.content {
+  flex: 1; // Розтягується на весь доступний простір
+  overflow-y: auto;   // Прокручується вертикально
+  overflow-x: hidden; // Жодного горизонтального скролу
+  padding: 24px;
+}

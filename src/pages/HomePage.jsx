@@ -2,6 +2,7 @@ import movies from '../data/movies.json';
 import MovieCard from '../components/MovieCard';
 import { useState, useEffect } from 'react';
 import Pagination from '../components/Pagination';
+import { useSearchParams } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -11,11 +12,23 @@ export default function HomePage() {
   const [selectedGenre, setSelectedGenre] = useState('Усі');
   const [sortBy, setSortBy] = useState('rating');
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlGenre = searchParams.get('genre');
+  const urlHall = searchParams.get('hall');
+  const urlFormat = searchParams.get('format');
+
+  useEffect(() => {
+    setSelectedGenre(urlGenre || 'Усі');
+    setCurrentPage(1);
+  }, [urlGenre, urlHall, urlFormat]);
+
   const filteredMovies = movies
     .filter((movie) => {
       const matchesSearch = movie.title.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesGenre = selectedGenre === 'Усі' || movie.genre === selectedGenre;
-      return matchesSearch && matchesGenre;
+      const matchesHall = !urlHall || movie.hall === urlHall;
+      const matchesFormat = !urlFormat || movie.format === urlFormat;
+      return matchesSearch && matchesGenre && matchesFormat && matchesHall;
     })
     .sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price;
@@ -56,6 +69,7 @@ export default function HomePage() {
         value={selectedGenre}
         onChange={(e) => {
           setSelectedGenre(e.target.value);
+          setSearchParams({});
           setCurrentPage(1);
         }}
       >

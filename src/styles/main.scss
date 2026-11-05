@@ -567,3 +567,32 @@ body {
   border-radius: 12px;
   font-size: 15px;
 }
+
+// 7. Хлібні крихти (Breadcrumbs) — стоять нерухомо над контентом
+.breadcrumbs {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  background-color: $bg-breadcrumbs;
+  border-bottom: 1px solid $border-color;
+  padding: 12px 24px;
+  font-size: 13px;
+  color: $text-muted;
+
+  // Посилання (попередні сторінки)
+  .breadcrumb-link {
+    color: $text-muted;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $text-main;
+    }
+  }
+
+  // Поточна остання сторінка (виділена білим кольором)
+  .breadcrumb-current {
+    color: $text-main;
+    font-weight: 500;
+  }
+}

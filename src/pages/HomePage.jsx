@@ -3,6 +3,7 @@ import MovieCard from '../components/MovieCard';
 import { useState, useEffect, useMemo } from 'react';
 import Pagination from '../components/Pagination';
 import { useOutletContext } from 'react-router-dom';
+import HeroBanner from '../components/HeroBanner';
 
 const ITEMS_PER_PAGE = 8;
 
@@ -22,12 +23,12 @@ export default function HomePage() {
         const matchesFormat = !filters.format || movie.format === filters.format;
         return matchesSearch && matchesFormat && matchesGenre && matchesHall;
       })
-    .sort((a, b) => {
-      if (sortBy === 'price-asc') return a.price - b.price;
-      if (sortBy === 'price-desc') return b.price - a.price;
-      if (sortBy === 'title') return a.title.localeCompare(b.title);
-      return b.rating - a.rating;
-    })
+      .sort((a, b) => {
+        if (sortBy === 'price-asc') return a.price - b.price;
+        if (sortBy === 'price-desc') return b.price - a.price;
+        if (sortBy === 'title') return a.title.localeCompare(b.title);
+        return b.rating - a.rating;
+      })
   }, [searchQuery, filters, sortBy]);
 
   const lastIndex = currentPage * ITEMS_PER_PAGE;
@@ -39,12 +40,13 @@ export default function HomePage() {
     document.querySelector('.content')?.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage]);
 
-   if (prevFilters !== filters) {
+  if (prevFilters !== filters) {
     setPrevFilters(filters);
     setCurrentPage(1);
   }
 
   return <div className="home-page">
+    <HeroBanner />
     <div className="section-header">
       <span className="section-subtitle">ЗАРАЗ У КІНО</span>
       <h1>АФІША ФІЛЬМІВ</h1>

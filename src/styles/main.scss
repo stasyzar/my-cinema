@@ -735,3 +735,211 @@ body {
     }
   }
 }
+
+// 13. Сторінка конкретного фільму (MoviePage)
+.movie-details-card {
+  display: flex;
+  gap: 36px;
+  background-color: $bg-panel;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 36px;
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+  }
+}
+
+// Ліва колонка: постер і бейдж віку
+.movie-poster-wrap {
+  flex-shrink: 0;
+  width: 280px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media (max-width: 860px) {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .movie-page-poster {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .movie-age-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+}
+
+// Права колонка: інформація
+.movie-info-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .movie-badges-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+
+    .badge-outline {
+      border: 1px solid $border-color;
+      color: $text-muted;
+    }
+  }
+
+  .movie-page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  // Рядок параметрів (рейтинг, час, ціна)
+  .movie-specs-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid $border-color;
+    flex-wrap: wrap;
+
+    .spec-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: $text-muted;
+
+      &.spec-rating {
+        color: #fbbf24;
+
+        strong {
+          color: #fff;
+          font-size: 16px;
+        }
+      }
+
+      &.spec-price {
+        color: $text-main;
+        font-weight: 700;
+        font-size: 15px;
+      }
+    }
+  }
+
+  // Опис сюжету
+  .movie-desc-block {
+    margin-bottom: 24px;
+
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: $text-main;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: $text-muted;
+    }
+  }
+
+  // Блок шарінгу в соцмережах
+  .movie-share-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid $border-color;
+
+    .share-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: $text-muted;
+    }
+
+    .share-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      color: $text-main;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid $border-color;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .btn-copy {
+      cursor: pointer;
+    }
+  }
+}
+
+// Стан "Фільм не знайдено" (404)
+.movie-not-found {
+  padding: 64px 24px;
+  text-align: center;
+  background-color: $bg-panel;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+
+  h2 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $text-muted;
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+
+  .btn-back {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: $accent-color;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}

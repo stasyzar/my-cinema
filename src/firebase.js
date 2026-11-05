@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBHw1UheEP53Uq1_h_AveagSlOqJzrE_HM",
-  authDomain: "mycinema-2eb63.firebaseapp.com",
-  projectId: "mycinema-2eb63",
-  storageBucket: "mycinema-2eb63.firebasestorage.app",
-  messagingSenderId: "268366227796",
-  appId: "1:268366227796:web:970bf8136c19f81c6000c1",
-  measurementId: "G-7L9SYD47MZ"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);

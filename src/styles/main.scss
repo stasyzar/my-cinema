@@ -943,3 +943,268 @@ body {
     font-size: 14px;
   }
 }
+
+// 14. Секція відгуків (ReviewSection)
+.reviews-section {
+  background-color: $bg-panel;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 36px;
+
+  @media (max-width: 640px) {
+    padding: 20px;
+  }
+
+  .reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $border-color;
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        font-size: 16px;
+        color: $text-muted;
+        font-weight: 400;
+      }
+    }
+  }
+
+  // Форма відгуку
+  .review-form {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 32px;
+
+    .review-form-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: $text-muted;
+
+      strong {
+        color: #fff;
+      }
+
+      .review-form-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    // Вибір кількості зірочок
+    .review-rating-picker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+
+      .rating-label {
+        font-size: 14px;
+        color: $text-muted;
+        font-weight: 500;
+      }
+
+      .stars-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .star-select-btn {
+          background: transparent;
+          border: none;
+          font-size: 22px;
+          line-height: 1;
+          color: #4b5563; // сіра неактивна зірочка
+          cursor: pointer;
+          padding: 0 2px;
+          transition: transform 0.1s ease, color 0.15s ease;
+
+          &:hover {
+            transform: scale(1.15);
+          }
+
+          &.active {
+            color: #fbbf24; // золота активна зірочка
+          }
+        }
+
+        .rating-number {
+          font-size: 13px;
+          color: $text-muted;
+          margin-left: 6px;
+        }
+      }
+    }
+
+    // Поле введення тексту
+    .review-textarea {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: $text-main;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 14px;
+      outline: none;
+      transition: border-color 0.15s ease;
+
+      &:focus {
+        border-color: rgba($accent-color, 0.7);
+      }
+
+      &::placeholder {
+        color: rgba($text-muted, 0.6);
+      }
+    }
+
+    // Кнопка відправки
+    .btn-submit-review {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      background-color: $accent-color;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  // Запрошення до авторизації для гостей
+  .review-login-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px dashed $border-color;
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+
+    p {
+      color: $text-muted;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .btn-review-login {
+      padding: 8px 18px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid $border-color;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  // Список карток відгуків
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .review-card {
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid $border-color;
+      border-radius: 10px;
+      padding: 18px 20px;
+
+      .review-card-top {
+        margin-bottom: 10px;
+      }
+
+      .review-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .review-author-avatar {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .review-avatar-placeholder {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background-color: rgba($accent-color, 0.2);
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 15px;
+          border: 1px solid rgba($accent-color, 0.4);
+        }
+
+        .review-author-name {
+          font-size: 14px;
+          font-weight: 600;
+          color: #fff;
+          margin-bottom: 2px;
+        }
+
+        .review-stars-display {
+          font-size: 13px;
+          color: #fbbf24;
+          letter-spacing: 2px;
+        }
+      }
+
+      .review-comment-text {
+        font-size: 14px;
+        line-height: 1.55;
+        color: $text-muted;
+        margin: 0;
+      }
+    }
+
+    .no-reviews-text {
+      text-align: center;
+      padding: 32px 16px;
+      color: $text-muted;
+      font-size: 14px;
+    }
+  }
+}

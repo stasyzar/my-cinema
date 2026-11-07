@@ -67,7 +67,7 @@ function Header({ toggleFilter, resetFilters }) {
                 {user ? (
                     <div>
                         {user.photoURL ? (
-                            <img src={user.photoURL} alt={user.displayName} />
+                            <img src={user.photoURL} alt={user.displayName} referrerPolicy="no-referrer" />
                         ) : (user.displayName?.[0])}
                         <span>{user.displayName}</span>
                         <button onClick={logout}>Вийти</button>

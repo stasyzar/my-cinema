@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { memo } from 'react';
 
-export default HeroBanner = memo(function HeroBanner() {
+function HeroBanner() {
     const [isMuted, setIsMuted] = useState(true);
     const videoRef = useRef(null);
 
@@ -50,4 +50,6 @@ export default HeroBanner = memo(function HeroBanner() {
             </div>
         </section>
     );
-})
+};
+
+export default memo(HeroBanner);

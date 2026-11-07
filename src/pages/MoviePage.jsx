@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import movies from '../data/movies.json';
 import Icon from '../components/common/Icon';
 import ShareButtons from '../components/common/ShareButtons';
+import ReviewSection from '../components/ReviewSection';
 
 export default function MoviePage() {
   const { id } = useParams();
@@ -56,10 +57,8 @@ export default function MoviePage() {
 
           <ShareButtons title={movie.title} />
         </div>
-
       </div>
-
-      {/* Нижче тут будуть Схема залу та Відгуки */}
+      <ReviewSection movieId={movie.id} />
     </div>
   );
 }

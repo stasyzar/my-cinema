@@ -1,7 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import movies from '../../data/movies.json';
+import { memo } from 'react'; 
 
-export default function Breadcrumbs() {
+function Breadcrumbs() {
   const location = useLocation();
   const pathName = location.pathname;
   let breadcrumbs = '';
@@ -49,3 +50,5 @@ export default function Breadcrumbs() {
     ))}
   </div>;
 }
+
+export default memo(Breadcrumbs);

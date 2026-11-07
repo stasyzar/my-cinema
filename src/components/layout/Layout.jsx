@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Breadcrumbs from './Breadcrumbs';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const INITIAL_FILTERS = {
   genre: [],
@@ -13,7 +13,7 @@ const INITIAL_FILTERS = {
 export default function Layout() {
   const [filters, setFilters] = useState(INITIAL_FILTERS);
 
-  const toggleFilter = (key, value) => {
+  const toggleFilter = useCallback((key, value) => {
     setFilters((prev) => {
       const current = prev[key];
 
@@ -28,9 +28,9 @@ export default function Layout() {
         [key]: current === value ? null : value,
       };
     });
-  };
+  }, []);
 
-  const resetFilters = () => setFilters(INITIAL_FILTERS);
+  const resetFilters = useCallback(() => setFilters(INITIAL_FILTERS), []);
 
   return (
     <div className="app-layout">

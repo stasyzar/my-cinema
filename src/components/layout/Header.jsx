@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Icon from '../common/Icon'
+import { memo } from 'react'; 
 
 const NAV_ITEMS = [
     {
@@ -27,7 +28,7 @@ const NAV_ITEMS = [
     },
 ];
 
-export default function Header({ toggleFilter, resetFilters }) {
+function Header({ toggleFilter, resetFilters }) {
     const { user, login, logout } = useAuth();
 
     return (
@@ -77,3 +78,5 @@ export default function Header({ toggleFilter, resetFilters }) {
         </header>
     );
 }
+
+export default memo(Header);

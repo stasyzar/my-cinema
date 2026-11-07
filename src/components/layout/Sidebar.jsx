@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useCallback, memo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import movies from '../../data/movies.json';
 import Icon from '../common/Icon';
 import { SIDEBAR_SECTIONS } from '../../data/sidebar_sections';
+
+const MOVIE_COUNTS = movies.reduce((acc, movie) => {
+  if (movie.genre) acc[`genre_${movie.genre}`] = (acc[`genre_${movie.genre}`] || 0) + 1;
+  if (movie.hall) acc[`hall_${movie.hall}`] = (acc[`hall_${movie.hall}`] || 0) + 1;
+  if (movie.format) acc[`format_${movie.format}`] = (acc[`format_${movie.format}`] || 0) + 1;
+  return acc;
+}, {});
 
 export default function Sidebar({ filters, toggleFilter, resetFilters }) {
   const [openGroups, setOpenGroups] = useState(
@@ -23,6 +30,11 @@ export default function Sidebar({ filters, toggleFilter, resetFilters }) {
       navigate('/');
     }
   };
+
+  const handleSelect = useCallback((key, value) => {
+    toggleFilter(key, value);
+    goToHomeIfNeeded();
+  }, [toggleFilter, location.pathname]);
 
   const isAllMoviesActive =
     filters.genre.length === 0 && !filters.hall && !filters.format;
@@ -63,15 +75,17 @@ export default function Sidebar({ filters, toggleFilter, resetFilters }) {
                       const isActive = Array.isArray(current)
                         ? current.includes(item.value)
                         : current === item.value;
-                      const count = movies.filter((m) => m[item.countKey] === item.value).length;
+                      const count = MOVIE_COUNTS[`${item.countKey}_${item.value}`] || 0;
                       return (
-                        <button key={item.label} onClick={() => {
-                          toggleFilter(item.countKey, item.value);
-                          goToHomeIfNeeded();
-                        }} className={isActive ? 'sidebar-level-2 active' : 'sidebar-level-2'}>
-                          <span>{item.label}</span>
-                          <span className="sidebar-badge">{count}</span>
-                        </button>
+                        <FilterItemButton
+                          key={item.label}
+                          label={item.label}
+                          count={count}
+                          isActive={isActive}
+                          countKey={item.countKey}
+                          value={item.value}
+                          onSelect={handleSelect}
+                        />
                       );
                     })}
                   </div>
@@ -84,3 +98,22 @@ export default function Sidebar({ filters, toggleFilter, resetFilters }) {
     </aside>
   )
 }
+
+const FilterItemButton = memo(function FilterItemButton({
+  label,
+  count,
+  isActive,
+  countKey,
+  value,
+  onSelect,
+}) {
+  return (
+    <button
+      onClick={() => onSelect(countKey, value)}
+      className={isActive ? 'sidebar-level-2 active' : 'sidebar-level-2'}
+    >
+      <span>{label}</span>
+      <span className="sidebar-badge">{count}</span>
+    </button>
+  );
+});

@@ -5,6 +5,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 html,
@@ -1744,5 +1749,307 @@ body {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+// ==========================================
+// 17. Сторінка контактів (ContactsPage)
+// ==========================================
+.contacts-page {
+  padding-bottom: 40px;
+
+  .contacts-hero {
+    margin-bottom: 32px;
+
+    .contacts-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .contacts-subtitle {
+      font-size: 15px;
+      color: $text-muted;
+      max-width: 640px;
+      line-height: 1.6;
+
+      strong {
+        color: #fff;
+      }
+    }
+  }
+
+  // 1. Сітка карток
+  .contacts-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin-bottom: 36px;
+
+    .contact-card {
+      background-color: $bg-panel;
+      border: 1px solid $border-color;
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .contact-card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background-color: rgba($accent-color, 0.12);
+        color: $accent-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      p {
+        font-size: 14px;
+        color: $text-main;
+        font-weight: 600;
+        margin-bottom: 4px;
+
+        a {
+          color: $text-main;
+          text-decoration: none;
+          transition: color 0.15s ease;
+
+          &:hover {
+            color: $accent-color;
+          }
+        }
+      }
+
+      .contact-card-sub {
+        font-size: 12px;
+        color: $text-muted;
+        line-height: 1.4;
+
+        a {
+          color: $text-muted;
+          text-decoration: none;
+
+          &:hover {
+            color: $text-main;
+          }
+        }
+      }
+    }
+  }
+
+  // 2. Ряд: Карта + Форма
+  .contacts-main-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+    }
+
+    .contacts-map-block,
+    .contacts-form-block {
+      background-color: $bg-panel;
+      border: 1px solid $border-color;
+      border-radius: 16px;
+      padding: 28px;
+
+      @media (max-width: 600px) {
+        padding: 20px;
+      }
+    }
+
+    .block-header {
+      margin-bottom: 20px;
+
+      h2 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+
+      p {
+        font-size: 13px;
+        color: $text-muted;
+      }
+    }
+
+    // Карта Leaflet
+    .map-container {
+      height: 380px;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid $border-color;
+      margin-bottom: 18px;
+      z-index: 1; // щоб карта не перекривала шапку при скролі
+    }
+
+    .map-transit-tips {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .transit-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: $text-muted;
+        background-color: rgba(255, 255, 255, 0.02);
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+
+        .transit-badge {
+          font-weight: 700;
+          color: $text-main;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    // Форма зворотного зв'язку
+    .contacts-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+
+        @media (max-width: 500px) {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        label {
+          font-size: 13px;
+          font-weight: 600;
+          color: $text-muted;
+        }
+
+        input,
+        textarea {
+          background-color: rgba(0, 0, 0, 0.35);
+          border: 1px solid $border-color;
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: $text-main;
+          font-size: 14px;
+          font-family: inherit;
+          outline: none;
+          transition: border-color 0.15s ease;
+
+          &:focus {
+            border-color: rgba($accent-color, 0.7);
+          }
+
+          &::placeholder {
+            color: rgba($text-muted, 0.5);
+          }
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 100px;
+        }
+      }
+
+      .btn-submit-contact {
+        padding: 12px 24px;
+        background-color: $accent-color;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 6px;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    // Сповіщення про успішну відправку
+    .form-success-alert {
+      text-align: center;
+      padding: 36px 20px;
+      background-color: rgba(34, 197, 94, 0.06);
+      border: 1px dashed rgba(34, 197, 94, 0.3);
+      border-radius: 12px;
+
+      .success-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(34, 197, 94, 0.15);
+        color: #22c55e;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      p {
+        font-size: 14px;
+        color: $text-muted;
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
+
+      .btn-send-again {
+        padding: 8px 18px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid $border-color;
+        color: #fff;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+      }
+    }
   }
 }
